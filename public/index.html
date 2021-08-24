@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <title>Pesquisar Cep</title>
+
+    <style>
+        h1, button, input,p{
+            font-family: 'Hind', sans-serif;
+        }
+
+        #bgImage{
+            background-image: url(./img/svg/background.svg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 30vh !important;
+        }
+
+        @media(min-width: 768px){
+            #bgImage{
+                height: 100vh !important;
+            }
+        }
+       
+    </style>
+</head>
+<body>
+
+    <div class="w-100 d-flex flex-column flex-md-row align-content-center justify-content-center">
+        <div id="bgImage" class="w-100 vh-100">
+        </div>
+        <div class="w-sm-100 w-md-75 vh-60 vh-md-100 pt-sm-5 ms-sm-3 p-5 d-flex flex-column align-content-center justify-content-center">
+            <h1 class="fs-1 fw-bold">Pesquisar Cep</h1>
+            <div class="w-100 d-flex flex-column align-content-center justify-content-center">
+                <input id="cepNumber" class="fs-4 p-2 mt-5 mb-3 bg-light rounded-3 border-secondary border-1"  placeholder="Cep" type="number">
+                <button  type="button" data-bs-toggle="modal" data-bs-target="#informationModal" class="btn btn-primary p-2 text-white fs-4 border-0 rounded-3" onclick="consultCep()">Pesquisar</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modal -->
+
+    <div class="modal fade" id="informationModal" tabindex="-1" aria-labelledby="informationModal" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title fs-3" id="modalTitle">Informações Cep:</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div id="modalDescription" class="modal-body fs-4">
+              ...
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Fechar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+    <script>
+        function consultCep(){
+            let modalTitle = document.getElementById('modalTitle');
+            let modalDescription = document.getElementById('modalDescription');
+
+            let cep = document.getElementById('cepNumber').value;
+
+            cepNumber = Number(cep);
+
+            if(cep == "" || cepNumber < 10000000 || cep > 99999999){
+                modalTitle.innerHTML = "Você inseriu um número inválido";
+                modalDescription.innerHTML = "Tente novamente inserindo um cep válido";
+
+                return console.log("Erro");
+            }
+            
+
+            fetch(`/cepInfo/${cep}`)
+            .then(res => {
+
+                console.log(res)
+
+               res.json().then(data => {
+                    
+
+                   if(data.erro){
+                        modalTitle.innerHTML = "Você inseriu um número inválido";
+                        modalDescription.innerHTML = "Tente novamente inserindo um cep válido";
+
+                        return console.log("eee")
+                   }
+
+                   
+
+                   console.log(data);
+                   openModal(data);
+               })
+
+            })
+            .catch(err => console.log("Novo erro: " + err))
+        }
+
+        function openModal(data){
+            let modalTitle = document.getElementById('modalTitle');
+            let modalDescription = document.getElementById('modalDescription');
+
+
+            modalTitle.innerHTML =  `Informações Cep: ${data.cep}`;
+
+            modalDescription.innerHTML =  `
+
+                    <p class="fs-4 m-2">
+                        <strong class="me-1">Localidade:</strong>
+                        ${data.localidade}
+                    </p>
+
+                    <p class="fs-4 m-2">
+                        <strong class="me-1">Bairro:</strong>
+                        ${data.bairro}
+                    </p>
+
+                    <p class="fs-4 m-2">
+                        <strong class="me-1">Logradouro:</strong>
+                        ${data.logradouro}
+                    </p>
+
+                    <p class="fs-4 m-2">
+                        <strong class="me-1">Uf:</strong>
+                        ${data.uf}
+                    </p>
+
+                    <p class="fs-4 m-2">
+                        <strong class="me-1">Ibge:</strong>
+                        ${data.ibge}
+                    </p>
+
+                    <p class="fs-4 m-2">
+                        <strong class="me-1">DDD:</strong>
+                        ${data.ddd}
+                    </p>
+
+                    `;
+        }
+
+        
+    </script>
+</body>
+</html>
