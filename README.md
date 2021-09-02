@@ -1,30 +1,58 @@
+
+
 <img  src="public/img/svg/screen.jpg"/>
 
-<h1 align="center">Pesquisar Cep</h1>
+<h1 align="center">
+  Pesquisar Cep
+</h1>
+<p align="center">Projeto desenvolvido com NodeJs</p>
 
-### Sobre
+<h4 align="center"> 
+	- Status: ✅ -
+</h4>
 
-Um site para verificar cep, com base na api da viacep. A api chama os dados pelo backend e posteriormente envia para o front end novamente, mostrando as principais informações do cep informado.
+### 🗺️ Sobre
+---
 
-### Pré-requisitos
+<p>Um site para verificar cep, com base na api da viacep. A api chama os dados pelo backend e posteriormente envia para o front end novamente, mostrando as principais informações do cep informado.</p>
 
-Antes de começar, você vai precisar ter instalado em sua máquina:
-[Node.js](https://nodejs.org/en/). 
+### 🔌 Como rodar o projeto
+---
 
+```bash
+# Clone este repositório
+$ git clone https://github.com/LeonardoLuize/PesquisarCep
 
-### Como executar
+# Entre na pasta do projeto
+$ cd PesquisarCep
 
-Para executar o projeto, é necessário baixar ou clonar o repositório e executar o comando abaixo:
+# Instale as dependências
+$ yarn install
 
+# Execute o projeto
+$ node index.js
+
+# Depois de iniciar o projeto em desenvolvimento, basta acessar http://localhost:3001
 ```
-  node index.js
-```
 
-Depois de executar o comando o site vai estar online em http://localhost:3001/
-
-### Tecnologias Utilizadas
-
-Foram usadas na construção do projeto as seguintes tecnologias:
+### 🔋 Tecnologias
+---
 
 - [Node.js](https://nodejs.org/en/)
 - [Bootstrap](https://getbootstrap.com/)
+
+### 🎲 Feito por
+---
+
+<a href="https://github.com/LeonardoLuize">
+ <img src="https://avatars.githubusercontent.com/u/74014082?v=4" width="100px;"/>
+ <br />
+ <sub><b>Leonardo Luize</b></sub></a> <a href="https://github.com/LeonardoLuize" >💻</a>
+
+
+Feito por Leonardo Luize 😁
+
+[![Linkedin Badge](https://img.shields.io/badge/-Leonardo-blue?style=rounded&logo=Linkedin&logoColor=white&link=https://www.linkedin.com/in/leonardoluize/)](https://www.linkedin.com/in/leonardoluize/) 
+[![Gmail Badge](https://img.shields.io/badge/-leonardo.luize2@gmail.com-c14438?style=rounded&logo=Gmail&logoColor=white&link=mailto:leonardo.luize2@gmail.com)](mailto:leonardo.luize2@gmail.com)
+
+
